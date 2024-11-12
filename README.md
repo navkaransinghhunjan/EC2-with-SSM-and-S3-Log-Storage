@@ -72,29 +72,8 @@ aws s3api create-bucket --bucket your-log-bucket-name --region ap-south-1 --crea
 ```
 Replace YOUR_ACCOUNT_ID and your-log-bucket-name accordingly.
 
-3. Create a CloudWatch Agent Configuration
 
-Save the following JSON configuration file (cloudwatch-config.json) to collect and store log files.
-```
-{
-  "logs": {
-    "logs_collected": {
-      "files": {
-        "collect_list": [
-          {
-            "file_path": "/var/log/messages",
-            "log_group_name": "ec2-instance-logs",
-            "log_stream_name": "{instance_id}",
-            "retention_in_days": 7
-          }
-        ]
-      }
-    },
-    "log_stream_name": "ec2-logs"
-  }
-}
-```
-### 4. Create an EC2 Instance with User Data Script
+### 3. Create an EC2 Instance with User Data Script
 
 Use the following steps to create the EC2 instance with a user data script to configure SSM and S3 logging.
 
@@ -124,7 +103,7 @@ echo "*/5 * * * * aws s3 cp /var/log/messages s3://your-log-bucket-name/ec2-logs
 ```
 Replace ami-12345678 with the desired AMI ID, and your-log-bucket-name with your actual bucket name.
 
-### 5. Verification
+### 4. Verification
 
 1. SSM Access: Check if the instance appears in the Systems Manager Console under Fleet Manager.
 2. Logs in S3: After a few minutes, verify that logs are uploaded to the S3 bucket as per the cron job.
