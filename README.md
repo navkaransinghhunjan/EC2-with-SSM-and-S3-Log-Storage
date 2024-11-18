@@ -32,7 +32,8 @@ The EC2 instance requires an IAM role with policies that enable it to communicat
           "Effect": "Allow",
           "Action": [
             "s3:PutObject",
-            "s3:PutObjectAcl"
+            "s3:PutObjectAcl",
+            "s3:GetEncryptionConfiguration"
           ],
           "Resource": "arn:aws:s3:::your-log-bucket-name/*"
         }
